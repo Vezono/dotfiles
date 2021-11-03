@@ -1,0 +1,63 @@
+super + z
+    pavucontrol
+
+super + shift + c
+    connman-gtk
+
+super + w
+    reloadwifi.sh
+
+super + shift + e
+    st dd if=/dev/random | pv | of=/dev/null
+
+super + shift + b
+    polybar.sh 
+
+super + Escape
+        pkill -USR1 -x sxhkd
+
+# quit/restart bspwm
+super + alt + {q,r}
+        bspc {quit,wm -r}
+
+super + r
+     ~/.config/rofi/launchers/colorful/launcher.sh
+
+super + shift + t
+    translate.sh
+
+super + m
+    ~/soft/Telegram/Telegram
+
+super + b
+    firefox
+
+super + t
+    st
+
+super + e
+    nemo
+
+super + v
+    slock
+
+super + g
+    st gomuks	
+
+Print
+    maim -s -u | xclip -selection clipboard -t image/png -i
+
+XF86AudioMute
+    amixer set Master toggle
+
+{XF86AudioRaiseVolume,XF86AudioLowerVolume}
+    pamixer -{i,d} 5 -u
+
+{XF86MonBrightnessUp,XF86MonBrightnessDown}
+    xbacklight -{inc,dec} 10
+
+{XF86AudioNext,XF86AudioPrev,XF86AudioPlay}
+    playerctl {next,previous,play-pause}
+
+XF86AudioMute
+    pamixer -t

@@ -1,0 +1,330 @@
+[colors]
+background = #1d1f21
+foreground = #c5c8c6
+alert = #bd2c40
+
+wifi = #e362c5
+backlight = #e3e90a
+pulseaudio = #6fa8dc
+battery = #ffb52a
+xkeyboard = #6ddc90
+date = #90619e
+
+label-layout-foreground = #90619e
+
+tag-empty-foreground = #afa8ff
+tag-focused-foreground = #6fa8dc
+tag-focused-underline = #6fa8dc
+tag-occupied-foreground = #6fa8dc
+tag-urgent-foreground = #bd2c40
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[bar/mybar]
+modules-left = dwm
+modules-right = packages weather ping memory cpubars wlan eth backlight-acpi pulseaudio battery xkeyboard date
+override-redirect = false
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 35
+radius = 15.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Droid Sans:size=12:style=bold;1
+font-1 = Material Design Icons:style=Regular:size=12;1
+
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = ${colors.wifi}
+label-connected = %essid%
+
+format-disconnected = 
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground}
+
+ramp-signal-0 = 󰤯
+ramp-signal-1 = 󰤟
+ramp-signal-2 = 󰤢
+ramp-signal-3 = 󰤥
+ramp-signal-4 = 󰤨
+ramp-signal-foreground = ${colors.wifi}
+
+[module/eth]
+type = internal/network
+interface = eth0
+interval = 3.0
+format-connected-underline = {colors.wifi}
+format-connected-prefix = "󰈀"
+format-connected-prefix-foreground = ${colors.foreground}
+label-connected = ""
+;label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground}
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = 󰖨 <label>
+format-foreground = ${colors.backlight}
+format-underline = ${colors.backlight}
+label = %percentage%%
+label-foreground = ${colors.foreground}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = 󰕾 <label-volume>
+format-volume-foreground = ${colors.pulseaudio}
+format-volume-underline = ${colors.pulseaudio}
+format-muted = 󰸈 <label-muted>
+format-muted-foreground = ${colors.pulseaudio}
+format-muted-underline = ${colors.pulseaudio}
+
+label-volume = %percentage%%
+label-volume-foreground = ${colors.foreground}
+
+label-muted-foreground = ${colors.foreground}
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+
+format-charging = 󰂏 <label-charging>
+format-charging-foreground = ${colors.battery}
+format-charging-underline = ${colors.battery}
+
+label-charging-foreground = ${colors.foreground}
+
+format-discharging = 󱊢 <label-discharging>
+format-discharging-foreground = ${colors.battery}
+format-discharging-underline = ${self.format-charging-underline}
+
+label-discharging-foreground = ${colors.foreground}
+
+format-full = 󱊣 <label-full>
+format-full-foreground = ${colors.battery}
+format-full-underline = ${self.format-charging-underline}
+
+label-full-foreground = ${colors.foreground}
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format = 󰈻 <label-layout>
+format-foreground = ${colors.xkeyboard}
+format-underline = ${colors.xkeyboard}
+
+label-layout = %layout%
+label-layout-foreground = ${colors.foreground}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+
+[module/weather]
+type = custom/script
+interval = 300
+exec = python3 ~/scripts/weather.py
+label = %output%
+format-underline = #db8f43
+
+[module/entropy]
+type = custom/script
+interval = 0.3
+exec = cat /proc/sys/kernel/random/entropy_avail
+label = %output%
+format-underline = #db8f43
+
+[module/ping]
+type = custom/script
+interval = 3
+exec = python3 ~/scripts/ping.py
+label = %output%
+format = 󰖩 <label>
+format-underline = #caaa33
+label-foreground = ${colors.foreground}
+format-foreground = #caaa33
+
+[module/cpubars]
+type = custom/script
+interval = 0.3
+exec = sb-cpubars
+label = %output%
+format = 󰍛 <label>
+label-foreground = ${colors.foreground}
+format-foreground = #43dbcc
+format-underline = #43dbcc
+
+[module/packages]
+type = custom/script
+interval = 300
+exec = ~/scripts/pacs.sh
+label = %output%
+label-foreground = ${colors.foreground}
+format-foreground = #43db55
+format-underline = #43db55
+
+[module/memory]
+type = internal/memory
+interval = 0.3
+label = %percentage_used%%
+format = 󰍹  <label>
+format-underline = #33844d
+
+[module/sb-memory]
+type = custom/script
+interval = 0.3
+exec = sb-memory
+label = 󰍹  %output%
+label-foreground = ${colors.foreground}
+format-foreground = #33844d
+format-underline = #33844d
+
+[module/date]
+type = internal/date
+interval = 0.3
+
+date = %d.%m.%y
+time = %H:%M:%S
+
+format-foreground = ${colors.foreground}
+format-underline = #0a6cf5
+
+label = %date% %time%
+format = 󰨲 <label>
+
+[module/dwm]
+type = internal/dwm
+format = <label-tags> <label-layout> <label-floating> <label-title>
+; Path to dwm socket (default: /tmp/dwm.sock)
+; socket-path = /tmp/dwm.sock
+
+; Left-click to view tag, right-click to toggle tag view
+enable-tags-click = false
+; Scroll to cycle between available tags
+enable-tags-scroll = false
+; If true and enable-tags-scroll = true, scrolling will view all tags regardless if occupied
+tags-scroll-empty = false
+; If true and enable-tags-scroll = true, scrolling will cycle through tags backwards
+tags-scroll-reverse = false
+; If true and enable-tags-scroll = true, wrap active tag when scrolling
+tags-scroll-wrap = false
+; Left-click to set secondary layout, right-click to switch to previous layout
+enable-layout-click = true
+; Scroll to cycle between available layouts
+enable-layout-scroll = false
+; Wrap when scrolling and reaching beginning/end of layouts
+layout-scroll-wrap = false
+; Reverse scroll direction
+layout-scroll-reverse = false
+
+; If enable-layout-click = true, clicking the layout symbol will switch to this layout
+secondary-layout-symbol = [M]
+
+; Separator in between shown tags
+; label-separator = |
+
+; Title of currently focused window
+; Available tokens:
+;   %title%
+label-title = %title%
+label-title-padding = 2
+label-title-foreground = ${colors.foreground}
+label-title-maxlen = 60
+
+; Defaults to 'Desktop'
+label-title-default = ""
+
+; Symbol of current layout
+; Available tokens:
+;   %symbol%
+label-layout = %symbol%
+label-layout-padding = 2
+label-layout-foreground = ${colors.label-layout-foreground} 
+;label-layout-background = ${colors.background}
+
+; Text to show when currently focused window is floating
+label-floating = 󰖲
+
+; States: focused, unfocused, visible, urgent, empty
+; Available tokens:
+;   %name%
+
+; focused = Selected tag on focused monitor
+label-focused = %name%
+label-focused-foreground = ${colors.tag-focused-foreground}
+label-focused-underline = ${colors.tag-focused-underline}
+label-focused-padding = 2
+
+; unfocused = Unselected tag on unselected monitor
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+; visible = Unselected tag, but occupied tag on any monitor
+label-visible = %name%
+;label-visible-background = ${colors.tag-occupied-background}
+label-visible-foreground = ${colors.tag-occupied-foreground}
+;label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Unselected tag with window that has urgency hint set
+label-urgent = %name%
+;label-urgent-background = ${colors.alert}
+label-urgent-foreground = ${colors.tag-urgent-foreground}
+label-urgent-padding = 2
+
+; empty = Unselected and unoccupied tag
+; This can be set to an empty string to hide empty tags
+label-empty = %name%
+label-empty-foreground = ${colors.tag-empty-foreground}
+label-empty-padding = 2
+
+; vim:ft=dosini

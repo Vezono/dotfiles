@@ -1,0 +1,2 @@
+bar.sh &
+pacs.sh &
