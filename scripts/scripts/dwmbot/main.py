@@ -1,5 +1,11 @@
 from subprocess import Popen, PIPE
 from telebot import TeleBot
+from config import *
+
+bot = TeleBot(token)
+
+vezono = admin
+
 
 bot.send_message(vezono, 'dwm started!!!')
 
