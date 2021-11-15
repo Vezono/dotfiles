@@ -1,0 +1,34 @@
+xsetroot -name "Loading FDE..."
+
+export XDG_RUNTIME_DIR=/run/user/$UID
+export XDG_CONFIG_HOME=$HOME/.config
+PATH=$PATH:$HOME/scripts
+PATH=$PATH:$HOME/.local/bin
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+export AWT_TOOLKIT=MToolkit
+wmname LG3D
+
+eval $(gnome-keyring-daemon --start)
+export SSH_AUTH_SOCK
+
+xbacklight -set 100
+
+pacs.sh &
+battery.sh &
+
+fix_run.sh
+
+feh --bg-scale ~/Wallpapers/minimegu.png
+
+pipewire &
+pipewire-pulse &
+pipewire-media-session &
+
+setxkbmap -layout us,ru,ua -option "grp:alt_shift_toggle"
+
+dwmbot.sh 
+
+sxhkd &
+picom &
+connman-gtk &
