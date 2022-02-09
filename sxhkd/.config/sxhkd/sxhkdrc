@@ -8,7 +8,7 @@ super + w
     reloadwifi.sh
 
 super + shift + e
-    st dd if=/dev/random | pv | of=/dev/null
+   element-desktop
 
 super + shift + b
     polybar.sh 
@@ -33,7 +33,7 @@ super + b
     firefox
 
 super + t
-    st
+    alacritty --hold 
 
 super + e
     nemo
