@@ -1,2 +1,1 @@
-killall -q python
-~/scripts/dwmbot/venv/bin/python ~/scripts/dwmbot/main.py &
+python3 ~/scripts/dwmbot/main.py 

@@ -8,9 +8,9 @@ def connect_time():
     # reachable
     before = time.perf_counter()
     for i in range(4):
-      s = socket.create_connection((host, 80), 2)
+      s = socket.create_connection((host, 22), 2)
     after = time.perf_counter()
     return f'{int((after - before)*100)} ms'
   except Exception as e:
-    return '-1 ms'
+     return '-1 ms'
 print(connect_time())
