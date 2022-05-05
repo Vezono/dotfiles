@@ -11,7 +11,6 @@ xkeyboard = #6ddc90
 date = #90619e
 
 label-layout-foreground = #90619e
-
 tag-empty-foreground = #afa8ff
 tag-focused-foreground = #6fa8dc
 tag-focused-underline = #6fa8dc
@@ -120,6 +119,8 @@ card = intel_backlight
 [module/pulseaudio]
 type = internal/pulseaudio
 
+click-middle = "pavucontrol"
+
 format-volume = 󰕾 <label-volume>
 format-volume-foreground = ${colors.pulseaudio}
 format-volume-underline = ${colors.pulseaudio}
@@ -192,6 +193,7 @@ format = 󰖩 <label>
 format-underline = #caaa33
 label-foreground = ${colors.foreground}
 format-foreground = #caaa33
+click-left = reloadwifi.sh
 
 [module/cpubars]
 type = custom/script
@@ -211,6 +213,7 @@ label = %output%
 label-foreground = ${colors.foreground}
 format-foreground = #43db55
 format-underline = #43db55
+click-left = "yay -Sydd"
 
 [module/memory]
 type = internal/memory
@@ -229,16 +232,16 @@ format-foreground = #33844d
 format-underline = #33844d
 
 [module/date]
-type = internal/date
+type = custom/script
 interval = 0.3
+exec = ~/scripts/get-time.sh
 
-date = %A %d.%m.%y
-time = %H:%M:%S
+click-left = switch-time.sh
 
 format-foreground = ${colors.foreground}
 format-underline = #0a6cf5
 
-label = %date% %time%
+label = %output%
 format = 󰨲 <label>
 
 [module/dwm]

@@ -1,2 +1,4 @@
 scripts/scripts/dwmbot/config.py
-
+venv/*
+venv
+__pycache__

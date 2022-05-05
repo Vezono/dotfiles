@@ -1,6 +1,12 @@
 super + z
     pavucontrol
 
+super + p
+    ~/scripts/xrandr.sh
+
+super + u
+    ~/scripts/switch-time.sh
+
 super + shift + c
     connman-gtk
 
@@ -45,6 +51,9 @@ super + g
     st gomuks	
 
 Print
+    maim -s -u | xclip -selection clipboard -t image/png -i
+
+super + shift + p
     maim -s -u | xclip -selection clipboard -t image/png -i
 
 XF86AudioMute
