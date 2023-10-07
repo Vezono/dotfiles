@@ -10,7 +10,7 @@ But here's quick start:
 
 ```
 cd ~ # you NEED to clone the repo to the $HOME directory
-git clone https://github.com/Senderman/dotfiles.git
+git clone https://github.com/Vezono/dotfiles.git
 cd dotfiles
 stow openbox
 ```
