@@ -1,3 +1,6 @@
+alias sxhkd-conf='nano .config/sxhkd/sxhkdrc'
+
+
 alias pacstore='doas pacman -Slq | fzf --multi --preview "pacman -Si {1}" | xargs -ro doas pacman -S'
 alias pacin='doas pacman -S'
 alias pacrem='doas pacman -Rns'

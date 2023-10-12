@@ -1,11 +1,5 @@
 #!/bin/bash
 
-subinc=1
-subchange=1 #$(echo "1 / $subinc" | bc -l)
-delay=0.001
-opt=""
-
-
 getIcon() {
     if [ "$1" -eq 0 ]; then
         echo "~/.icons/tmp/display-brightness-off-symbolic.svg"
@@ -19,8 +13,8 @@ getIcon() {
 
 }
 
-pamixer --source alsa_input.pci-0000_04_00.6.analog-stereo -t
-current=$(pamixer --source alsa_input.pci-0000_04_00.6.analog-stereo --get-volume-human|head -c -2)
+pamixer --source alsa_input.pci-0000_04_00.6.3.analog-stereo -t
+current=$(pamixer --source alsa_input.pci-0000_04_00.6.3.analog-stereo --get-volume-human|head -c -2)
 truncated=$(echo "$current" | cut -d '.' -f1)
 if [ "$current" == "mute" ]; then
     current=0

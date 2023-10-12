@@ -8,7 +8,7 @@ XF86Launch1
     ~/scripts/dunst_mic_toggle.sh
 
 super + m
-    ayugram-desktop
+    telegram-desktop
 
 super + r
     ~/.config/rofi/launchers/type-1/launcher.sh 

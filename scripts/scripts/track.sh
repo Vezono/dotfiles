@@ -17,6 +17,6 @@ fi
 
 
 text=$(echo "$artist - $track" | tr -s " ")
-echo "%{F#FDD835}$HEADPHONES_EMOJI%{F-} $text %{F#FDD835}$PLAYER_STATUS_EMOJI"
+echo "$text"
 
 
