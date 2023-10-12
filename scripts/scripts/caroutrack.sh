@@ -32,6 +32,13 @@ get_track
 
 while true; do
     get_track
+
+    # Empty output if no track is playing
+    if [ "$len" -eq 0 ]; then
+        echo ""
+        continue
+    fi
+
     len=$(get_len "$CURRENT_TRACK")
 
     # Display track if it's shorter than the display length
