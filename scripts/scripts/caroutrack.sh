@@ -32,15 +32,14 @@ get_track
 
 while true; do
     get_track
+    len=$(get_len "$CURRENT_TRACK")
 
     # Empty output if no track is playing
     if [ "$len" -eq 0 ]; then
         echo ""
         continue
     fi
-
-    len=$(get_len "$CURRENT_TRACK")
-
+O
     # Display track if it's shorter than the display length
     if [ "$len" -lt "$DISPLAY_LEN" ]; then
         echo "%{F#FDD835}$HEADPHONES_EMOJI%{F-} $CURRENT_TRACK %{F#FDD835}$(get_status_emoji)"
