@@ -16,3 +16,6 @@ zstyle ':omz:update' mode disabled
 
 autoload -Uz compinit
 compinit
+
+# Created by `pipx` on 2023-10-24 23:40:10
+export PATH="$PATH:/home/vezono/.local/bin"

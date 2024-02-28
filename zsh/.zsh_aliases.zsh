@@ -1,5 +1,8 @@
-alias sxhkd-conf='nano .config/sxhkd/sxhkdrc'
+alias sxhkd-conf='nano ~/.config/sxhkd/sxhkdrc'
+alias bspwm-conf='nano ~/.config/bspwm/bspwmrc'
 
+alias englify='export LANG=C'
+alias ukrainify='export LANG=uk_UA.utf8'
 
 alias pacstore='doas pacman -Slq | fzf --multi --preview "pacman -Si {1}" | xargs -ro doas pacman -S'
 alias pacin='doas pacman -S'
@@ -19,3 +22,4 @@ alias g='git'
 alias f='ranger'
 alias trr='transmission-remote'
 alias s6-rc-user="s6-rc -l $XDG_RUNTIME_DIR/s6/s6-rc"
+alias neofetch="neofetch --source ~/Documents/vezono-color --ascii_colors 2 4 2"

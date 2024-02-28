@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Constants and initializations
 HEADPHONES_EMOJI="󰋋"
@@ -46,36 +46,24 @@ while true; do
         continue
     fi
 
-    # Initialize cut positions if the track has changed
-    if [ "$PREV_TRACK" != "$CURRENT_TRACK" ]; then
-        LEFT_CUT=0
-        RIGHT_CUT=$((len - DISPLAY_LEN))
-        PREV_TRACK="$CURRENT_TRACK"
-    fi
+    text=$CURRENT_TRACK
 
-    if [ "$REVERSE" -eq 0 ]; then
-        ((LEFT_CUT++))
-        ((RIGHT_CUT--))
-        # Switch to reverse scrolling if needed
-        if [ "$LEFT_CUT" -ge $((len - DISPLAY_LEN)) ]; then
-            REVERSE=1
-        fi
+    if [ "$l" -eq $((len)) ]; then
+        (( l=0 ))
     else
-        if [ "$LEFT_CUT" -le 1 ]; then
-            REVERSE=0
+        (( l = (l+1) % ${#text} ))
+        if [ "$l" -eq 0 ]; then
+            (( l=len ))
         fi
-        ((LEFT_CUT--))
-        ((RIGHT_CUT++))
     fi
 
-    # Create the text to display
-    DISPLAY_TEXT="${CURRENT_TRACK:${LEFT_CUT}}"
-    if [ "$RIGHT_CUT" -gt 0 ] && [ $(get_len "$DISPLAY_TEXT") -gt $RIGHT_CUT ]; then
-        DISPLAY_TEXT="${DISPLAY_TEXT:0:-${RIGHT_CUT}}"
-    fi
+    (( l2 = (l - ${#text}) > 0 ? (l - ${#text}) : 0 ))
+    (( w2 = (l + $DISPLAY_LEN - ${#text}) > 0 ? (l + $DISPLAY_LEN - ${#text}) : 0 ))
+
+    DISPLAY_TEXT=$(printf '%s\r' "%{F#FDD835}$HEADPHONES_EMOJI%{F-}  ${text:$l:$DISPLAY_LEN} ${text:$l2:$w2} %{F#FDD835}$(get_status_emoji)")
 
     # Print the formatted text
-    echo "%{F#FDD835}$HEADPHONES_EMOJI%{F-} $DISPLAY_TEXT %{F#FDD835}$(get_status_emoji)"
+    echo "$DISPLAY_TEXT"
 
     # Sleep for a short duration
     sleep 0.1

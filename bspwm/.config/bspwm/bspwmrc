@@ -22,11 +22,10 @@ bspc config gapless_monocle      true
 bspc rule -a Screenkey manage=off
 bspc rule -a Lua5.1 state=floating center=true
 
+picom &
 spectacle -fb &
 polybar &
 nm-applet &
-pipewire &
-pipewire-pulse &
-wireplumber &
 dunst &
 ~/scripts/dunst_battery.sh 10 &
+nextcloud &
