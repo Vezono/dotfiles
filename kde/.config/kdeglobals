@@ -101,7 +101,7 @@ ForegroundVisited=224,64,251
 
 [DirSelect Dialog]
 DirSelectDialog Size=833,598
-History Items[$e]=file:$HOME/Topaley,file:$HOME,file:$HOME/Media/Music/deemix Music/Loved Tracks,file:$HOME/.local/share/PrismLauncher,file:$HOME,file:$HOME/Documents,file:$HOME/Documents,file:$HOME,file:$HOME/.local/share/PolyMC/instances/1.18.2/,file:$HOME/.local/share/PolyMC,file:$HOME/.local/share/PolyMC/instances/1.19.2/.minecraft
+History Items[$e]=file:$HOME,file:$HOME/Documents
 
 [General]
 BrowserApplication=vivaldi-stable.desktop
