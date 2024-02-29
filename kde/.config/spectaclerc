@@ -1,0 +1,37 @@
+[$Version]
+update_info=spectacle_clipboard.upd:clipboard-settings-change,spectacle_rememberregion.upd:spectacle-migrate-rememberregion
+
+[Annotations]
+annotationToolType=6
+ellipseFillColor=255,0,0,0
+ellipseShadow=false
+ellipseStrokeColor=255,0,0
+ellipseStrokeWidth=5
+freehandStrokeWidth=5
+rectangleFillColor=240,255,234,0
+rectangleShadow=false
+rectangleStrokeColor=170,0,0
+rectangleStrokeWidth=1
+textFont=Noto Sans,22,-1,5,50,0,0,0,0,0
+textFontColor=255,0,0
+
+[General]
+clipboardGroup=PostScreenshotCopyImage
+onLaunchAction=UseLastUsedCapturemode
+rememberLastRectangularRegion=Never
+showCaptureInstructions=false
+
+[GuiConfig]
+captureDelay=5
+captureMode=0
+quitAfterSaveCopyExport=true
+window-position=827,467
+
+[KFileDialog Settings]
+Recent Files[$e]=file:$HOME/Screenshot_20230908_104032.png,file:$HOME/Screenshot_20230908_104032.png
+Recent URLs[$e]=file:$HOME/,file:$HOME/Documents/
+detailViewIconSize=16
+
+[Save]
+lastSaveAsLocation=file:///home/vezono/Screenshot_20240217_210510.png
+lastSaveLocation=file:///home/vezono/Media/Pictures/Screenshot_20240229_114020.png
