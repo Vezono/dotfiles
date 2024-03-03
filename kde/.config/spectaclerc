@@ -2,7 +2,7 @@
 update_info=spectacle_clipboard.upd:clipboard-settings-change,spectacle_rememberregion.upd:spectacle-migrate-rememberregion
 
 [Annotations]
-annotationToolType=6
+annotationToolType=5
 ellipseFillColor=255,0,0,0
 ellipseShadow=false
 ellipseStrokeColor=255,0,0
@@ -34,4 +34,4 @@ detailViewIconSize=16
 
 [Save]
 lastSaveAsLocation=file:///home/vezono/Screenshot_20240217_210510.png
-lastSaveLocation=file:///home/vezono/Media/Pictures/Screenshot_20240229_114020.png
+lastSaveLocation=file:///home/vezono/Media/Pictures/Screenshot_20240302_130524.png
