@@ -8,3 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
 export PATH="$PATH:/home/vezono/.local/bin"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
