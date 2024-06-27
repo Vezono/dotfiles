@@ -7,6 +7,10 @@ export AWT_TOOLKIT=MToolkit
 wmname VezonoBSPWM
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_STYLE_OVERRIDE=kvantum
+
+killall -q swhks
+sudo killall -q swhkd
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
@@ -23,7 +27,7 @@ bspc rule -a Screenkey manage=off
 bspc rule -a Lua5.1 state=floating center=true
 
 picom &
-spectacle -fb &
+#spectacle -fb &
 polybar &
 nm-applet &
 dunst &

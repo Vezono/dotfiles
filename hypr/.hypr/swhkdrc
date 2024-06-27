@@ -4,13 +4,13 @@ super + shift + z
 super + m
     telegram-desktop
 
-XF86Launch1
-    ~/.config/rofi/launchers/type-1/launcher.sh 
+#XF86Launch1
+#    ~/.config/rofi/launchers/type-1/launcher.sh 
 
 super + r
     ~/.config/rofi/launchers/type-1/launcher.sh 
 
-super  + b
+super + b
     librewolf
 
 super + t
@@ -20,7 +20,7 @@ super + e
     dolphin
 
 Print
-    QT_STYLE_OVERRIDE="" && spectacle -brc
+    grimblast copy area
 
 super + l
     slock
@@ -28,8 +28,8 @@ super + l
 super + p
     xrandr.sh
 
-XF86PowerOff
-    powermenu.sh
+#XF86PowerOff
+#    powermenu.sh
 
 XF86AudioMute
     amixer -D pulse sset Master toggle
@@ -47,27 +47,7 @@ super + {XF86AudioRaiseVolume,XF86AudioLowerVolume}
 
 # make sxhkd reload its configuration files:
 super + Escape
-        pkill -USR1 -x sxhkd
-
-# make polybar reload its configuration files:
-super + shift + p
-        pkill -USR1 -x polybar
-
-# close and kill
-super + {q}
-        bspc node -c
-
-# quit/restart bspwm
-super + shift + {q,r}
-        bspc {quit,wm -r}
-
-# switch to floating/tiled
-super + shift + {f,t}
-        bspc node -t {floating,tiled}
-
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-        bspc {desktop -f,node -d} '^{1-9,10}'
+        pkill -HUP -x swhkd
 
 
 

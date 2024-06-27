@@ -2,18 +2,13 @@
 LastMimeType=application/zip
 
 [ExtractDialog]
-DirHistory[$e]=/opt/gbc_drive/ISO/Kali Linux QCOW/,$HOME/Downloads/,$HOME/soft/
+DirHistory[$e]=$HOME/Torrents/,$HOME/,$HOME/soft/,$HOME/pasuk-server/mods/,$HOME/Documents/GBC/Semester_4/DevOps/lab11/,/opt/gbc_drive/ISO/Kali Linux QCOW/,$HOME/Downloads/
 eDP-1 Height 1920x1080 eDP-1=598
 eDP-1 Width 1920x1080 eDP-1=1280
 
 [General]
 LockSidebar=true
 ShowSidebar=false
-
-[KFileDialog Settings]
-Recent Files[$e]=file:$HOME
-Recent URLs[$e]=file:$HOME/soft/,file:///opt/gbc_drive/ISO/Kali Linux QCOW/
-detailViewIconSize=16
 
 [KTextEditor Document]
 Allow End of Line Detection=true
@@ -129,12 +124,16 @@ Word Completion=true
 Word Completion Minimal Word Length=3
 Word Completion Remove Tail=true
 
+[KTextEditor::Search]
+Search History=188.120.236.127,188.120.236.127/,188
+
 [MainWindow]
-1920x1080 screen: Height=471
+1920x1080 screen: Height=997
 1920x1080 screen: Width=900
 1920x1080 screen: XPosition=1006
-1920x1080 screen: YPosition=595
-State=AAAA/wAAAAD9AAAAAQAAAAEAAAC9AAADofwCAAAAAfsAAAAWAGEAcgBrAF8AcwBpAGQAZQBiAGEAcgAAAAAuAAADoQAAAG4BAAACAAADhAAAAYkAAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAA=
+1920x1080 screen: YPosition=69
+RestorePositionForNextInstance=false
+StatusBar=Disabled
 ToolBarsMovable=Disabled
 eDP=eDP
 eDP-1=eDP-1
@@ -147,14 +146,14 @@ eDP-1 XPosition 1920x1080=610
 eDP-1 XPosition 1920x1080 eDP-1=650
 eDP-1 YPosition 1920x1080=282
 eDP-1 YPosition 1920x1080 eDP-1=349
-splitterSizes=317,106
+splitterSizes=837,56
 
 [Viewer]
 1920x1080 screen: Height=471
-1920x1080 screen: Width=900
-1920x1080 screen: XPosition=1004
-1920x1080 screen: YPosition=593
-State=AAAA/wAAAAD9AAAAAAAAA4QAAAGMAAAABAAAAAQAAAAIAAAACPwAAAADAAAAAQAAAAAAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAAAAAACAAAAAA==
+1920x1080 screen: Width=424
+1920x1080 screen: XPosition=1482
+1920x1080 screen: YPosition=595
+State=AAAA/wAAAAD9AAAAAAAAAagAAAGMAAAABAAAAAQAAAAIAAAACPwAAAADAAAAAQAAAAAAAAACAAAAAQAAABYAbQBhAGkAbgBUAG8AbwBsAEIAYQByAQAAAAD/////AAAAAAAAAAAAAAACAAAAAA==
 StatusBar=Disabled
 ToolBarsMovable=Disabled
 eDP=eDP

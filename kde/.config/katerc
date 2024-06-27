@@ -63,6 +63,7 @@ Font=Hack,10,-1,7,50,0,0,0,0,0
 Line Height Multiplier=1
 Show Indentation Lines=false
 Show Whole Bracket Expression=false
+Text Font=monospace,9,-1,2,400,0,0,0,0,0,0,0,0,0,0,1
 Word Wrap Marker=false
 
 [KTextEditor View]
@@ -126,12 +127,14 @@ Word Completion Minimal Word Length=3
 Word Completion Remove Tail=true
 
 [KTextEditor::Search]
-Replace History=,\\\\n,PERM,FILE
-Search History="token": ",answers,ip,died,\\\\u,file_exists,deept,deep,woman,sex,minecraft,russia,dunst,logo.jpg,http,href,script,save_bonus,users_data,load_users_data,\n\n,\\\\n\\\\n,logo.png,GL,input_perm,file_path,physi
+Replace History=\\,,,\\\\n,PERM,FILE
+Search History=\\\\\\\\\\,,\\\\\\,,арна,\x00\x00\x00CURRENT_LANGUAGE,\x00\x00\x00serverLanguages,uk,patch,atch,try_s,try_r,try,try_,name,.php,getStory,lua/,slime,"token": ",answers,ip,died,\\\\u,file_exists,deept,deep,woman,sex,minecraft,russia,dunst,logo.jpg,http,href,script,save_bonus,users_data,load_users_data,\n\n,\\\\n\\\\n,logo.png,GL,input_perm,file_path,physi
 
 [MainWindow]
+1280x720 screen: Window-Maximized=true
 1920x1080 screen: Height=997
 1920x1080 screen: Width=900
+1920x1080 screen: Window-Maximized=true
 HDMI-1 Window-Maximized 1920x1080 HDMI-1=true
 eDP-1 Height 1920x1080=480
 eDP-1 Height 1920x1080 eDP-1=941
@@ -142,6 +145,7 @@ eDP-1 Window-Maximized 1920x1080=true
 [filetree]
 editShade=31,81,106
 listMode=false
+middleClickToClose=false
 shadingEnabled=true
 showCloseButton=false
 showFullPathOnRoots=false

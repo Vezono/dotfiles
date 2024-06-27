@@ -1,2 +1,2 @@
 #!/bin/bash
-exec ssh vezono.gts.org.ua -D 8887 -N
+exec ssh gts.org.ua -D 8887 -N

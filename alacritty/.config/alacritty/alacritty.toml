@@ -5,7 +5,7 @@ blinking = "Off"
 shape = "Beam"
 
 [font]
-size = 6
+size = 10.50
 
 [font.bold]
 family = "Hack Nerd Font"

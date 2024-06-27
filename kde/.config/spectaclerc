@@ -2,7 +2,7 @@
 update_info=spectacle_clipboard.upd:clipboard-settings-change,spectacle_rememberregion.upd:spectacle-migrate-rememberregion
 
 [Annotations]
-annotationToolType=5
+annotationToolType=6
 ellipseFillColor=255,0,0,0
 ellipseShadow=false
 ellipseStrokeColor=255,0,0
@@ -27,11 +27,10 @@ captureMode=0
 quitAfterSaveCopyExport=true
 window-position=827,467
 
-[KFileDialog Settings]
-Recent Files[$e]=file:$HOME/Screenshot_20230908_104032.png,file:$HOME/Screenshot_20230908_104032.png
-Recent URLs[$e]=file:$HOME/,file:$HOME/Documents/
-detailViewIconSize=16
+[ImageSave]
+lastImageSaveAsLocation=file:///home/vezono/x.png
+lastImageSaveLocation=file:///home/vezono/x.png
+translatedScreenshotsFolder=Знімки вікон
 
-[Save]
-lastSaveAsLocation=file:///home/vezono/Screenshot_20240217_210510.png
-lastSaveLocation=file:///home/vezono/Media/Pictures/Screenshot_20240302_130524.png
+[VideoSave]
+translatedScreencastsFolder=Трансляції з екрана

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo $$ >> /tmp/info_timezone.pid
+
 FORMAT="%d.%m.%Y %X"
 
 set -- "Canada/Eastern" "Europe/Kyiv"
