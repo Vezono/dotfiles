@@ -2,23 +2,24 @@
 update_info=spectacle_clipboard.upd:clipboard-settings-change,spectacle_rememberregion.upd:spectacle-migrate-rememberregion
 
 [Annotations]
-annotationToolType=6
+annotationToolType=9
 ellipseFillColor=255,0,0,0
 ellipseShadow=false
 ellipseStrokeColor=255,0,0
 ellipseStrokeWidth=5
 freehandStrokeWidth=5
+pixelateStrength=1
 rectangleFillColor=240,255,234,0
 rectangleShadow=false
 rectangleStrokeColor=170,0,0
-rectangleStrokeWidth=1
+rectangleStrokeWidth=5
 textFont=Noto Sans,22,-1,5,50,0,0,0,0,0
 textFontColor=255,0,0
 
 [General]
 clipboardGroup=PostScreenshotCopyImage
-onLaunchAction=UseLastUsedCapturemode
-rememberLastRectangularRegion=Never
+launchAction=UseLastUsedCaptureMode
+rememberSelectionRect=Never
 showCaptureInstructions=false
 
 [GuiConfig]
@@ -26,11 +27,3 @@ captureDelay=5
 captureMode=0
 quitAfterSaveCopyExport=true
 window-position=827,467
-
-[ImageSave]
-lastImageSaveAsLocation=file:///home/vezono/x.png
-lastImageSaveLocation=file:///home/vezono/x.png
-translatedScreenshotsFolder=Знімки вікон
-
-[VideoSave]
-translatedScreencastsFolder=Трансляції з екрана

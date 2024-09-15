@@ -1,42 +1,28 @@
-// __        __          _                 
-// \ \      / /_ _ _   _| |__   __ _ _ __  
-//  \ \ /\ / / _` | | | | '_ \ / _` | '__| 
-//   \ V  V / (_| | |_| | |_) | (_| | |    
-//    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    
-//                 |___/                   
-//  
-// by Stephan Raabe (2023) 
-// ----------------------------------------------------- 
-//
 {
-    // General Settings
-    "layer": "top",
     "margin-bottom": 0,
+    "margin-top": 10,
     "layer": "top",
-    "margin-left": 0,
-    "margin-right": 0,    
+    "margin-left": 10,
+    "margin-right": 10,    
     "spacing": 0,
 
-    // Load Modules
     "include": ["~/.hypr/waybar/modules.json"],
 
-    // Modules Left
     "modules-left": [
         "hyprland/workspaces",
+        "hyprland/window"
     ],
 
-    // Modules Center
     "modules-center": [
-        "hyprland/window",
-        "custom/empty"
+        "custom/track"
     ],
 
-    // Modules Right    
     "modules-right": [
+        "hyprland/language",
         "pulseaudio",
         "battery", 
         "network",
         "clock",
-        "tray",
+        "tray"
     ]
 }

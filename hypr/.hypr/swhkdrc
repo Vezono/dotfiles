@@ -4,8 +4,7 @@ super + shift + z
 super + m
     telegram-desktop
 
-#XF86Launch1
-#    ~/.config/rofi/launchers/type-1/launcher.sh 
+
 
 super + r
     ~/.config/rofi/launchers/type-1/launcher.sh 
@@ -28,9 +27,6 @@ super + l
 super + p
     xrandr.sh
 
-#XF86PowerOff
-#    powermenu.sh
-
 XF86AudioMute
     amixer -D pulse sset Master toggle
 
@@ -43,11 +39,11 @@ super + {XF86AudioRaiseVolume,XF86AudioLowerVolume}
 {XF86MonBrightnessUp,XF86MonBrightnessDown}
     xbacklight {-inc,-dec} 10
 
-# bspwm hotkeys
 
-# make sxhkd reload its configuration files:
+
 super + Escape
-        pkill -HUP -x swhkd
+    pkill -HUP swhkd
 
-
+super + shift + p
+    ~/.hypr/waybar/launch.sh
 

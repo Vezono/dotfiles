@@ -12,7 +12,7 @@ export QT_STYLE_OVERRIDE=kvantum
 killall -q swhks
 sudo killall -q swhkd
 
-pgrep -x sxhkd > /dev/null || sxhkd &
+pgrep -x sxhkd > /dev/null || sxhkd -c ~/.config/bspwm/sxhkdrc &
 
 bspc monitor -d I II III IV V VI VII VIII IX
 
@@ -26,9 +26,10 @@ bspc config gapless_monocle      true
 bspc rule -a Screenkey manage=off
 bspc rule -a Lua5.1 state=floating center=true
 
+#alacritty &
 picom &
 #spectacle -fb &
-polybar &
+polybar -c ~/.config/bspwm/polybar/config.ini &
 nm-applet &
 dunst &
 ~/scripts/dunst_battery.sh 10 &

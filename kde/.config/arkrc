@@ -1,11 +1,6 @@
 [CreateDialog]
 LastMimeType=application/zip
 
-[ExtractDialog]
-DirHistory[$e]=$HOME/Torrents/,$HOME/,$HOME/soft/,$HOME/pasuk-server/mods/,$HOME/Documents/GBC/Semester_4/DevOps/lab11/,/opt/gbc_drive/ISO/Kali Linux QCOW/,$HOME/Downloads/
-eDP-1 Height 1920x1080 eDP-1=598
-eDP-1 Width 1920x1080 eDP-1=1280
-
 [General]
 LockSidebar=true
 ShowSidebar=false
