@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+
+Exec=alacritty --working-directory %f
+Icon=terminal
+
+Categories=terminal;
+
+Name=Alacritty (Folder)

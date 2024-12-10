@@ -1,0 +1,19 @@
+anchor_to_edges: true
+position: top
+start:
+- type: workspaces
+  all_monitors: false
+- type: focused
+end:
+- type: volume
+  format: '{icon} {volume}%'
+  max_volume: 100
+  icons:
+    volume_high: 󰕾
+    volume_medium: 󰖀
+    volume_low: 󰕿
+    muted: 󰝟
+- type: script
+  mode: 'watch'
+  cmd: "info_timezone.sh"
+  on_click_left: 'kill -USR1 $(cat /tmp/info_timezone.pid)'

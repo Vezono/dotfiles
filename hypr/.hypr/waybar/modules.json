@@ -1,0 +1,152 @@
+{
+    "hyprland/workspaces" : {
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+			"urgent": "<span color='#ba2b1b'>​<b>󰍹</b></span>",
+			"active": "<span color='#c14b36'>​<b>󰍹</b></span>",
+			"empty": "<span color='#b2b2b2'>​<b>󰍹</b></span>",
+            "default": "<span color='#22ead3'>​<b>󰍹</b></span>"
+        },
+        "persistent-workspaces": {
+            "*": 9
+        },
+        
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1"
+    },
+
+    "hyprland/window": {
+        "rewrite": {
+            "(.*) - Brave": "$1",
+            "(.*) - Chromium": "$1",
+            "(.*) - Brave Search": "$1",
+            "(.*) - Outlook": "$1",
+            "(.*) Microsoft Teams": "$1"
+        },
+        "separate-outputs": true
+    },
+
+    "custom/separator": {
+        "format": "<b>|</b>"
+    },
+
+    "cpu": {
+        "interval": 1,
+        "format": " {usage}%"
+    },
+
+    "memory": {
+        "interval": 1,
+        "format": "󰐟  {}%"
+    },
+
+    "custom/empty": {
+        "format": ""
+    },
+
+    "custom/track": {
+        "format": "{}",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec": "~/.hypr/waybar/scripts/marquee_track.sh"
+    },
+
+    "custom/microphone": {
+        "format": "{}",
+        "interval": 1,
+        "exec": "~/.hypr/waybar/scripts/microphone_emoji.sh",
+        "on-click": "~/scripts/toggle_mic.sh"
+    },
+
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {           
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 9
+    },
+
+    "clock": {
+        "timezones": ["Canada/Eastern", "Europe/Kyiv"],
+
+        "locale": "uk_UA.utf8",
+
+        "format": "󰃮  {:%a | %d.%m.%Y %X}",
+        "interval": 1,
+
+        "tooltip-format": "<big>{:%d.%m.%Y}</big>\n<tt><small>{calendar}</small></tt>",
+
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 4,
+            "weeks-pos"     : "left",
+            "format": {
+                "months":     "<span color='#ffead3'>​<b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'>​<b>{}</b></span>",
+                "today":      "<span color='#ff6699'>​<b><u>{}</u></b></span>"
+            }
+        },
+
+        "actions": {
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down"
+	    }
+    },
+
+
+    "hyprland/language": {
+        "format": "󰏪  {short}"
+    },
+
+    "network": {
+        "interface": "w*",
+
+        "format": "{ifname}",
+        "format-wifi": "   {essid}",
+        "format-disconnected": "Disconnected",
+        "tooltip-format": " {ifname} via {gwaddri}",
+        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50,
+        "on-click": "nm-connection-editor"
+    },
+
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}   {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "tooltip-format": "{time}",
+
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": "󰖁 {icon}",
+        "format-muted": "󰖁 {format_source}",
+        "format-icons": {
+            "headset": "󰋎 ",
+            "default": ["󰕿 ", "󰖀 ", "󰕾 "]
+        },
+        "on-click": "pavucontrol"
+    }
+}

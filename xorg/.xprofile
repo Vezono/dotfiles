@@ -1,0 +1,7 @@
+export LANG="uk_UA.UTF-8"
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/keys/*
+
+~/scripts/s6kill.sh
+s6-svscan ~/.s6/sv &

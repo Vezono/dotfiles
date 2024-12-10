@@ -1,0 +1,2 @@
+#!/bin/bash
+exec dbus-daemon --nofork --session --address=$DBUS_SESSION_BUS_ADDRESS 

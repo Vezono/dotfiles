@@ -1,0 +1,37 @@
+{
+    "margin-bottom": 0,
+    "margin-top": 0,
+    "layer": "top",
+    "margin-left": 0,
+    "margin-right": 0,    
+    "spacing": 0,
+
+    "include": ["~/.hypr/waybar/modules.json"],
+
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/separator",
+        "cpu",
+        "memory",
+        "battery", 
+        "custom/separator",
+        "hyprland/window"
+    ],
+
+    "modules-center": [
+        "custom/track"
+    ],
+
+    "modules-right": [
+        "hyprland/language",
+        "custom/separator",
+        "pulseaudio",
+        "custom/microphone",
+        "custom/separator",
+        "network",
+        "custom/separator",
+        "clock",
+        "custom/separator",
+        "tray"
+    ]
+}
