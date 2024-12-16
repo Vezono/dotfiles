@@ -1,79 +1,52 @@
 #!/bin/bash
 
-KEY=$RANDOM
+accents=$(cat <<EOF
+    A, Grave - À
+    A, Circumflex - Â
+    A, Diaeresis - Ä
 
-function show_mod_info {
-  TXT="\\n<span face='Monospace'>$(modinfo $1 | sed 's/&/\&amp;/g;s/</\&lt;/g;s/>/\&gt;/g')</span>"
-  yad --title="Module information" \
-      --window-icon="application-x-addon" \
-      --button="yad-close" \
-      --width=500 \
-      --image="application-x-addon" --text="$TXT"
-}
-export -f show_mod_info
+    C, Cedilla - Ç
 
-# CPU tab
-yad --plug=$KEY --tabnum=1 --text="CPU information" \
-    --button="zzz" &
+    E, Acute - É
+    E, Grave - È
+    E, Circumflex - Ê
+    E, Diaeresis - Ë
 
-# Memory tab
-sed -r "s/:[ ]*/\n/" /proc/meminfo |\
-  yad --plug=$KEY --tabnum=2 --image=media-memory \
-      --text="Memory usage information" \
-      --list --no-selection --column="Parameter" --column="Value" &
+    I, Circumflex - Î
+    I, Diaeresis - Ï
 
-# Harddrive tab
-df -T | tail -n +2 | awk '{printf "%s\n%s\n%s\n%s\n%s\n%s\n", $1,$7, $2, $3, $4, $6}' |\
-  yad --plug=$KEY --tabnum=3 --image=drive-harddisk \
-      --text="Disk space usage" \
-      --list --no-selection --column="Device" \
-      --column="Mountpoint" --column="Type" \
-      --column="Total:sz" --column="Free:sz" \
-      --column="Usage:bar" &
+    O, Circumflex - Ô
+    O, Diaeresis - Ö
 
-# PCI tab
-lspci -vmm | sed 's/\&/\&amp;/g' | grep -E "^(Slot|Class|Vendor|Device|Rev):" | cut -f2 |\
-  yad --plug=$KEY --tabnum=4 --text="PCI bus devices" \
-      --list --no-selection --column="ID" --column="Class" \
-      --column="Vendor" --column="Device" --column="Rev" &
+    U, Grave - Ù
+    U, Circumflex - Û
+    U, Diaeresis - Ü
 
-# Modules tab
-awk '{printf "%s\n%s\n%s\n", $1, $3, $4}' /proc/modules | sed "s/[,-]$//" |\
-  yad --plug=$KEY --tabnum=5 --text="Loaded kernel modules" \
-      --image="application-x-addon" --image-on-top \
-      --list --dclick-action='bash -c "show_mod_info %s"' \
-      --column="Name" --column="Used" --column="Depends" &
+    Y, Diaeresis - Ÿ
 
-# Battery tab
-( acpi -i ; acpi -a ) | sed -r "s/:[ ]*/\n/" | yad --plug=$KEY --tabnum=6 \
-  --image=battery --text="Battery state" --list --no-selection \
-  --column="Device" --column="Details" &
+    a, Grave - à
+    a, Circumflex - â
+    a, Diaeresis - ä
 
-# Sensors tab
-SENSORS=($(sensors | grep -E '^[^:]+$'))
-sid=1
-cid=1
+    c, Cedilla - ç
 
-for s in ${SENSORS[@]}; do
-  echo -e "s$sid\n<b>$s</b>\n"
-  sensors -A "$s" | tail -n +2 | while read ln; do
-    [[ $ln == "" ]] && continue
-    echo "$cid:s$sid"
-    echo $ln | sed -r 's/:[ ]+/\n/'
-    ((cid++))
-  done
-    ((sid++))
-done | yad --plug=$KEY --tabnum=7 --text="Temperature sensors information" \
-  --list --tree --tree-expanded --no-selection --column="Sensor" --column="Value" &
+    e, Acute - é
+    e, Grave - è
+    e, Circumflex - ê
+    e, Diaeresis - ë
 
-# Main dialog
-TXT="<b>Hardware system information</b>\\n\\n"
-TXT+="\\tOS: $(lsb_release -ds) on $(hostname)\\n"
-TXT+="\\tKernel: $(uname -sr)\\n\\n"
-TXT+="\\tUptime: <i>$(uptime)</i>"
+    i, Circumflex - î
+    i, Diaeresis - ï
 
-yad --notebook --window-icon="dialog-information" \
-    --width=600 --height=450 --title="System info" --text="$TXT" --button=yad-close \
-    --key=$KEY --tab="CPU" --tab="Memory" --tab="Disks" --tab="PCI" --tab="Modules" \
-    --tab="Battery" --tab="Sensors" --active-tab=${1:-1}
+    o, Circumflex - ô
+    o, Diaeresis - ö
 
+    u, Grave - ù
+    u, Circumflex - û
+    u, Diaeresis - ü
+
+    y, Diaeresis - ÿ
+EOF
+)
+
+echo "$accents" | wofi -S dmenu | awk -F '- ' '{print $2}' | wl-copy
