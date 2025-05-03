@@ -1,6 +1,8 @@
 #!/bin/bash
 
 accents=$(cat <<EOF
+    ss, Estze - ß
+
     A, Grave - À
     A, Circumflex - Â
     A, Diaeresis - Ä
@@ -30,6 +32,8 @@ accents=$(cat <<EOF
 
     c, Cedilla - ç
 
+    oe, - œ
+
     e, Acute - é
     e, Grave - è
     e, Circumflex - ê
@@ -49,4 +53,4 @@ accents=$(cat <<EOF
 EOF
 )
 
-echo "$accents" | wofi -S dmenu | awk -F '- ' '{print $2}' | wl-copy
+echo "$accents" | wofi -S dmenu | awk -F '- ' '{print $2}' | tr -d '\n' | wl-copy

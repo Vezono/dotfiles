@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 PATH_TO_DOTFILES=~/dotfiles
 
 if [ -z "$1" ] || [ -z "$2" ]; then
@@ -10,7 +10,7 @@ file_to_link=$(readlink -f "$1")
 CATEGORY=$2
 
 RELF=$(dirname "$file_to_link")
-RELF="${RELF#$HOME}"
+RELF="${RELF#"$HOME"}"
 
 dotfiling_destination="$PATH_TO_DOTFILES/$CATEGORY$RELF/"
 
