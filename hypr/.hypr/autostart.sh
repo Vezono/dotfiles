@@ -11,11 +11,11 @@ pipewire &
 pipewire-pulse &
 wireplumber &
 
-wl-clip-persist --clipboard regular --ignore-event-on-error &
 wl-paste --watch cliphist store &
 
 nm-applet &
 ~/.hypr/waybar/launch.sh
 nextcloud & 
+kanshi -c ~/.hypr/kanshi.conf &
 sleep 3
 XDG_SESSION_TYPE=x11 birdtray &
