@@ -24,14 +24,21 @@ window#waybar {
 }
 
 #workspaces button {
-    border: 0px;
+    background: #16588e;
 }
 
-#workspaces button:hover {
-    background: none;
-    border: none;
+#workspaces button.empty {
+    background: transparent;
 }
 
+#workspaces button.visible,
+#workspaces button.active {
+    background: #2b4522;
+}
+
+#workspaces button.urgent {
+    background: #ea6962;
+}
 
 
 /* -----------------------------------------------------

@@ -133,7 +133,7 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [General]
-ColorSchemeHash=babca25f3a5cf7ece26a85de212ab43d0a141257
+ColorSchemeHash=98139d0bac64c4e9f97721675584832c7c7a0bf0
 Name=Kvantum
 shadeSortColumn=true
 
@@ -146,9 +146,6 @@ Allow Expansion=false
 Automatically select filename extension=true
 Breadcrumb Navigation=true
 Decoration position=2
-LocationCombo Completionmode=5
-PathCombo Completionmode=5
-Show Bookmarks=false
 Show Full Path=false
 Show Inline Previews=true
 Show Preview=false

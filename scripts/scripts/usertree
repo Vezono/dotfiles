@@ -1,0 +1,89 @@
+#!/bin/sh
+
+s6_sourcedir="$HOME/.hypr/s6-usertree"
+
+s6_compdir="$s6_sourcedir/rc/compiled" # compiled database directory
+s6_dir="$XDG_RUNTIME_DIR/s6" # s6 data folder (scandir, livedir, logs, etc)
+s6_scandir="$s6_dir/service" # s6 scandir
+s6_livedir="$s6_dir/s6-rc" # s6-rc livedir
+s6_logger_dir="$s6_scandir/s6-svscan-log" # servicedir of catch-all logger
+s6_logger_fifo="$s6_logger_dir/fifo" # fifo where all uncaught messages will go
+
+start_tree() {
+    rm -rf "$s6_dir"
+    mkdir -p "$s6_scandir"
+    mkdir -p "$s6_dir/log"
+    cp -rL "$s6_sourcedir/s6-svscan-log" "$s6_scandir"
+    mkfifo "$s6_logger_fifo"
+    
+    setsid -f \
+        fdmove -c 4 1 \
+        redirfd -wnb 1 "$s6_logger_fifo" \
+        fdmove -c 2 1 \
+        envfile $s6_sourcedir/config/global.conf \
+        s6-svscan -d 4 "$s6_scandir" | read -r s6_ready
+    unset s6_ready
+    
+    s6-rc-init -c "$s6_compdir" -l "$s6_livedir" "$s6_scandir"
+    s6-rc -l "$s6_livedir" start default
+}
+
+stop_tree(){
+  s6-svc -d "$s6_logger_dir"
+  s6-svscanctl -t "$s6_scandir"
+}
+
+recompile(){
+    TS="$(date +%s)"
+    NEW_DB="$s6_sourcedir/rc/compiled-$TS"
+    SOURCES="$s6_sourcedir/sv"
+    SOURCES_NO_GIT="$s6_sourcedir/svnogit"
+    mkdir -p "${SOURCES_NO_GIT}"
+    
+    echo "Compiling new database to ${NEW_DB}..."
+    set -x
+    s6-rc-compile "$NEW_DB" "$SOURCES" "${SOURCES_NO_GIT}"
+    set +x
+    result=$?
+    if [ "$result" -ne 0 ]; then
+        echo "Failed to compile database!"
+        exit 1
+    fi
+    
+    if [ -d "$s6_livedir" ]; then
+        echo "Displaying what services will be stopped, and what services will be started"
+        s6-rc-update -n -l "$s6_livedir" "$NEW_DB"
+        echo "Enter n to decline, enter anything else to proceed"
+        read -r apply
+        if [ "${apply}" = "n" ]; then
+          echo "Database is saved and compiled, but system is not switched to it"
+          exit 1
+        fi
+        echo "Switching to the new database"
+        set -x
+        s6-rc-update -l "$s6_livedir" "$NEW_DB"
+        set +x
+    fi
+    echo "Updating symlink to the newly compiled database"
+    set -x
+    s6-ln -nsf "$NEW_DB" "$s6_compdir"
+    set +x
+    echo "Switched to the new database!"
+}
+
+
+case "$1" in
+    start)
+        start_tree
+    ;;
+    stop)
+        stop_tree
+    ;;
+    recompile)
+        recompile
+    ;;
+    *)
+      printf "Usage: %s start|stop|recompile\n" "$(basename ${0})"
+    ;;
+esac
+

@@ -30,4 +30,4 @@ sleep 0.2
 config_file="config"
 style_file="style.css"
 
-waybar -c ~/.hypr/waybar/$config_file -s ~/.hypr/waybar/$style_file &
+waybar -c ~/.hypr/waybar/$config_file -s ~/.hypr/waybar/$style_file

@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
 accents=$(cat <<EOF
+    l, Polish L - ł
+
     ss, Estze - ß
 
     A, Grave - À

@@ -1,2 +1,2 @@
 #!/bin/bash
-exec ssh central-1.gts.org.ua -D 8887 -N
+exec ssh touka.gts.org.ua -D 8887 -N
