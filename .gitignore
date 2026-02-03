@@ -2,4 +2,4 @@ supervise
 event
 .s6-svscan
 gtk/.config/gtk-3.0/bookmarks
-hypr/.hypr/s6-usertree/rc
+rc

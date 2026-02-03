@@ -1,61 +1,74 @@
 #!/bin/sh
 
-s6_sourcedir="$HOME/.hypr/s6-usertree"
+xdg_data="${XDG_DATA_HOME:-${HOME}/.local/share}"
 
-s6_compdir="$s6_sourcedir/rc/compiled" # compiled database directory
+s6_srcdir="${HOME}/.config/mango/s6-usertree" # directory with inital s6 configs, svcs, and databases
+s6_compdir="$s6_srcdir/rc/compiled" # compiled database directory
 s6_dir="$XDG_RUNTIME_DIR/s6" # s6 data folder (scandir, livedir, logs, etc)
 s6_scandir="$s6_dir/service" # s6 scandir
 s6_livedir="$s6_dir/s6-rc" # s6-rc livedir
 s6_logger_dir="$s6_scandir/s6-svscan-log" # servicedir of catch-all logger
-s6_logger_fifo="$s6_logger_dir/fifo" # fifo where all uncaught messages will go
+s6_logger_fifo="$s6_logger_dir/fifo" # fifo where all uncaught logs will go
 
-start_tree() {
-    rm -rf "$s6_dir"
+boot_tree() {
+    if s6-svscanctl -z "${s6_scandir}" 2>/dev/null; then
+        echo "s6-svscan is already running on ${s6_scandir}, doing nothing"
+        exit 1;
+    fi
+    rm -f "${s6_livedir}"
+    rm -rf "${s6_scandir}"
+
     mkdir -p "$s6_scandir"
     mkdir -p "$s6_dir/log"
-    cp -rL "$s6_sourcedir/s6-svscan-log" "$s6_scandir"
+    cp -rL "$s6_srcdir/s6-svscan-log" "$s6_scandir"
     mkfifo "$s6_logger_fifo"
     
     setsid -f \
-        fdmove -c 4 1 \
-        redirfd -wnb 1 "$s6_logger_fifo" \
-        fdmove -c 2 1 \
-        envfile $s6_sourcedir/config/global.conf \
-        s6-svscan -d 4 "$s6_scandir" | read -r s6_ready
-    unset s6_ready
-    
+    fdmove -c 4 1 \
+    redirfd -wnb 1 "$s6_logger_fifo" \
+    fdmove -c 2 1 \
+    envfile -I "$s6_srcdir/config/global.conf" \
+    s6-svscan -d 4 "$s6_scandir" | read -r _
+
     s6-rc-init -c "$s6_compdir" -l "$s6_livedir" "$s6_scandir"
+    
     s6-rc -l "$s6_livedir" start default
 }
 
-stop_tree(){
-  s6-svc -d "$s6_logger_dir"
-  s6-svscanctl -t "$s6_scandir"
+tear_tree(){
+  s6-svc -d "$s6_logger_dir" # stop the catch-all logger first, or else it will ignore s6 shutdown and continue to run
+  s6-svscanctl -t "$s6_scandir" # shut down the s6 tree
+  sleep 1
+  rm -f "${s6_livedir}"
+  rm -rf "${s6_scandir}"
 }
+
 
 recompile(){
     TS="$(date +%s)"
-    NEW_DB="$s6_sourcedir/rc/compiled-$TS"
-    SOURCES="$s6_sourcedir/sv"
-    SOURCES_NO_GIT="$s6_sourcedir/svnogit"
-    mkdir -p "${SOURCES_NO_GIT}"
+    NEW_DB="${s6_srcdir}/rc/compiled-$TS"
+    SOURCES_SV="${s6_srcdir}/sv"
+    SOURCES_BUNDLES="${s6_srcdir}/bundles"
     
     echo "Compiling new database to ${NEW_DB}..."
     set -x
-    s6-rc-compile "$NEW_DB" "$SOURCES" "${SOURCES_NO_GIT}"
-    set +x
+    s6-rc-compile "$NEW_DB" "$SOURCES_SV" "$SOURCES_BUNDLES"
     result=$?
+    set +x
+    echo
     if [ "$result" -ne 0 ]; then
         echo "Failed to compile database!"
         exit 1
     fi
     
-    if [ -d "$s6_livedir" ]; then
+    if s6-svscanctl -z "${s6_scandir}" 2>/dev/null; then
         echo "Displaying what services will be stopped, and what services will be started"
+        echo
         s6-rc-update -n -l "$s6_livedir" "$NEW_DB"
-        echo "Enter n to decline, enter anything else to proceed"
+        echo
+        echo "Enter YES in uppercase to confirm, enter anything else to decline"
         read -r apply
-        if [ "${apply}" = "n" ]; then
+        if [ "${apply}" != "YES" ]; then
           echo "Database is saved and compiled, but system is not switched to it"
           exit 1
         fi
@@ -63,27 +76,47 @@ recompile(){
         set -x
         s6-rc-update -l "$s6_livedir" "$NEW_DB"
         set +x
+        echo
+    else
+        echo "s6-svscan is not running on ${s6_scandir}, skipping online database switching"
+        echo
     fi
     echo "Updating symlink to the newly compiled database"
     set -x
     s6-ln -nsf "$NEW_DB" "$s6_compdir"
     set +x
+    echo
     echo "Switched to the new database!"
 }
 
+service_up(){
+    s6-rc -l "$s6_livedir" -v 2 start "$@"
+}
+
+service_down(){
+    s6-rc -l "$s6_livedir" -v 2 stop "$@"
+}
 
 case "$1" in
-    start)
-        start_tree
+    b)
+        boot_tree 
     ;;
-    stop)
-        stop_tree
+    t)
+        tear_tree
     ;;
-    recompile)
+    r)
         recompile
     ;;
+    u)
+        shift
+        service_up "$@"
+    ;;
+    d)
+        shift
+        service_down "$@"
+    ;;
     *)
-      printf "Usage: %s start|stop|recompile\n" "$(basename ${0})"
+        printf "Usage: %s [command] <args>\n\n  u <svc1> <svc2> <svc3> - start service(s)\n  d <svc1> <svc2> <svc3> - stop service(s)\n  b - boot usertree\n  t - teardown usertree\n  r - recompile database and switch to it if usertree is running\n\n" "$(basename "${0}")"
     ;;
 esac
 

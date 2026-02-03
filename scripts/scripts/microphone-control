@@ -1,0 +1,36 @@
+#!/bin/sh
+
+source=$(pactl get-default-source)
+
+emoji_active="<span color='#61C766'><b>󰍬</b></span>"
+emoji_mute="<span color='#EC7875'><b>󰍭</b></span>"
+
+# to set as exec in waybar
+get_emoji(){
+	current=$(pamixer --source $source --get-volume-human|head -c -2)
+	emoji=$emoji_active
+	if [ "$current" == "mute" ]; then
+    		emoji=$emoji_mute
+	fi
+	echo $emoji
+}
+
+# to set as on-click in waybar
+toggle_mic(){
+	pamixer --source $source -t
+	notify-send "Source: $source. $(pactl get-source-mute $(pactl get-default-source))"
+}
+
+
+
+case "$1" in
+	emoji)
+		get_emoji
+	;;
+	toggle)
+		toggle_mic
+	;;
+	*)
+		printf "Usage: %s [command]\n\nemoji - get current status emoji with waybar coloring\ntoggle - toggle default source off or on\n\n" "$(basename "${0}")"
+	;;
+esac

@@ -18,7 +18,7 @@ get_status_emoji() {
 
 get_track() {
     # Get the current track using your track.sh script
-    CURRENT_TRACK=$(~/scripts/track.sh)
+    CURRENT_TRACK="$(~/scripts/track.sh)"
 }
 
 get_len() {
@@ -42,7 +42,7 @@ while true; do
 
     # Display track if it's shorter than the display length
     if [ "$len" -lt $((DISPLAY_LEN+5)) ]; then
-        echo "%{F#FDD835}$HEADPHONES_EMOJI%{F-} $CURRENT_TRACK %{F#FDD835}$(get_status_emoji)"
+        echo "<span color='#FDD835'>​<b>$HEADPHONES_EMOJI</b></span> $CURRENT_TRACK <span color='#FDD835'>​<b>$(get_status_emoji)</b></span>"
         continue
     fi
 
@@ -60,7 +60,7 @@ while true; do
     (( l2 = (l - ${#text}) > 0 ? (l - ${#text}) : 0 ))
     (( w2 = (l + $DISPLAY_LEN - ${#text}) > 0 ? (l + $DISPLAY_LEN - ${#text}) : 0 ))
 
-    DISPLAY_TEXT=$(printf '%s\r' "%{F#FDD835}$HEADPHONES_EMOJI%{F-}  ${text:$l:$DISPLAY_LEN} ${text:$l2:$w2} %{F#FDD835}$(get_status_emoji)")
+    DISPLAY_TEXT=$(printf '%s' "<span color='#FDD835'>​<b>$HEADPHONES_EMOJI</b></span>  ${text:$l:$DISPLAY_LEN} ${text:$l2:$w2} <span color='#FDD835'>​<b>$(get_status_emoji)</b></span>")
 
     # Print the formatted text
     echo "$DISPLAY_TEXT"
