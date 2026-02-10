@@ -3,3 +3,4 @@ event
 .s6-svscan
 gtk/.config/gtk-3.0/bookmarks
 rc
+.zcompdump
