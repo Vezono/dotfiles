@@ -55,4 +55,6 @@ accents=$(cat <<EOF
 EOF
 )
 
-echo "$accents" | wofi -S dmenu | awk -F '- ' '{print $2}' | tr -d '\n' | wl-copy
+result=$(echo "$accents" | fuzzel -d | awk -F '- ' '{print $2}' | tr -d '\n')
+echo $result | wl-copy
+cb=$(wl-paste); wl-copy "$result" && ydotool key 29:1 42:1 47:1 47:0 42:0 29:0 && wl-copy "$cb"
