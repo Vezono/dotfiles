@@ -1,0 +1,41 @@
+#!/bin/sh
+
+send_notification() {
+	# Get the volume level and convert it to a percentage
+	volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+	volume_mic=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
+	muted=$(echo "$volume" | awk '{print $3}')
+	muted=$(echo "$volume_mic" | awk '{print $3}')
+	volume=$(echo "$volume" | awk '{print $2}')
+	volume=$(echo "( $volume * 100 ) / 1" | bc)
+
+	if [[ "$muted" == "[MUTED]" ]]; then
+		notify-send -t 1000 -a 'wp-vol' -h int:value:$volume "muted"
+	else
+		notify-send -t 1000 -a 'wp-vol' -h int:value:$volume "volume: ${volume}%"
+	fi
+}
+
+case $1 in 
+	up)
+		wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
+		;;
+	down)
+		wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-
+		;;
+	mute)
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+		;;
+	mic)
+		wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+		volume_mic=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
+		muted=$(echo "$volume_mic" | awk '{print $3}')
+		if [[ "$muted" == "[MUTED]" ]]; then
+			notify-send -t 1000 "mic muted"
+		else
+			notify-send -t 1000 "mic unmuted"
+		fi
+		exit
+		;;
+esac
+send_notification

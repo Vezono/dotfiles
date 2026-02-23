@@ -1,3 +1,4 @@
+#export DISPLAY=:0
 export PATH=$PATH:$HOME/scripts:$HOME/bin
 export PATH="$HOME/.npm-global/bin:$PATH"
 
@@ -9,6 +10,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass 
 
 export EDITOR=nvim
 
