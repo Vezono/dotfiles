@@ -55,8 +55,33 @@ accents=$(cat <<EOF
 EOF
 )
 
-result=$(echo "$accents" | fuzzel -d | awk -F '- ' '{print $2}' | tr -d '\n')
-echo $result | wl-copy
+
+FREQ_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/accent-freq.tsv"
+touch "$FREQ_FILE"
+
+sorted=$(echo "$accents" | grep -v '^\s*$' | awk -v freqfile="$FREQ_FILE" '
+    BEGIN {
+        while ((getline line < freqfile) > 0) {
+            split(line, f, "\t")
+            counts[f[2]] = f[1]
+        }
+    }
+    {
+        key = $NF
+        printf "%05d\t%s\n", (key in counts ? counts[key] : 0), $0
+    }
+' | sort -rn | cut -f2-)
+
+result=$(echo "$sorted" | fuzzel -d | awk '{print $NF}' | tr -d '\n')
+
+[[ -z "$result" ]] && exit 0
+
+if grep -qF "$result" "$FREQ_FILE"; then
+    tmp=$(mktemp)
+    awk -v key="$result" 'index($0, key) { print $1+1 "\t" key; next } { print }' "$FREQ_FILE" > "$tmp"
+    mv "$tmp" "$FREQ_FILE"
+else
+    printf '1\t%s\n' "$result" >> "$FREQ_FILE"
+fi
+
 wl-copy "$result"
-# the line below pastes the selected symbol while saving the previous clipboard content. requires ydotool running.
-# cb=$(wl-paste); wl-copy "$result" && ydotool key 29:1 42:1 47:1 47:0 42:0 29:0 && wl-copy "$cb"
