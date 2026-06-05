@@ -1,0 +1,28 @@
+[[mgr.prepend_keymap]]
+on   = "<Enter>"
+run  = "enter"
+desc = "Enter the child directory"
+
+[[mgr.prepend_keymap]]
+on  = "<C-n>"
+run = "shell -- dragon-drop -x -T %h"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "m" ]
+run  = "cd ~/Media"
+desc = "Go ~/Media"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "s" ]
+run  = "cd ~/.local/share"
+desc = "Go ~/.local/share"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "p" ]
+run  = "cd ~/Projects"
+desc = "Go ~/Projects"
+
+[[mgr.prepend_keymap]]
+on = ["~"]
+run = "plugin sel-size"
+desc = "Start sel-size worker"
