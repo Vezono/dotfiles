@@ -1,0 +1,55 @@
+pkgname=mangowm-readiness-notification-git
+pkgver=r1620.6584ed2f
+pkgrel=1
+pkgdesc="A Wayland compositor with smooth animation (with readiness notification for s6)"
+url="https://github.com/mangowm/mango"
+arch=("x86_64")
+license=("GPL-3.0")
+depends=(
+  'wayland>=1.23.1'
+  'libinput>=1.27.1'
+  libdrm
+  pixman
+  libxkbcommon
+  pcre2
+  cjson
+  libxcb
+  xorg-xwayland
+  'libwlroots-0.19.so'
+  'scenefx0.4'
+)
+
+makedepends=(
+  git
+  meson
+  ninja
+  'wayland-protocols>=1.41'
+)
+
+provides=(mangowm wayland-compositor)
+conflicts=(mangowm mangowm-wlonly-git)
+source=("$pkgname::git+https://github.com/mangowm/mango.git" "mango-readiness-notification.diff")
+md5sums=('SKIP' '71e97246196646b3d4fb1b6c95d7558a')
+options=('!strip' '!lto')
+
+
+pkgver() {
+  cd "$pkgname"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+    cd $pkgname
+    git apply ../mango-readiness-notification.diff
+}
+
+build() {
+  export CC="gcc"
+  arch-meson $pkgname build
+  ninja -C build
+}
+
+package() {
+  DESTDIR="$pkgdir/" ninja -C build install
+}
+
