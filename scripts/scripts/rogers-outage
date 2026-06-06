@@ -1,0 +1,46 @@
+#!/bin/sh
+set -eu
+
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <latitude> <longitude>"
+    echo "Example: $0 50.45 30.50"
+    exit 1
+fi
+
+LAT="$1"
+LON="$2"
+
+BASE="https://chatapps-services.rogers.com"
+COOKIE_JAR="$(mktemp)"
+
+cleanup() {
+    rm -f "$COOKIE_JAR"
+}
+trap cleanup EXIT
+
+# Obtain outage session/token cookies
+curl -sS \
+    -X POST \
+    "$BASE/ucx-session/outages/token" \
+    -H 'Content-Type: application/json' \
+    -H 'channel: WEB' \
+    -H 'application: VIRTUAL_ASSISTANT' \
+    -H 'brand: ROGERS' \
+    -H "request-identifier: $(uuidgen)" \
+    -c "$COOKIE_JAR" \
+    --data '{"userName":"Outage"}' \
+    >/dev/null
+
+# Query outage API
+curl -sS \
+    -X POST \
+    "$BASE/network/outage/residential/known/info" \
+    -H 'Content-Type: application/json' \
+    -H 'channel: WEB' \
+    -H 'application: VIRTUAL_ASSISTANT' \
+    -H 'brand: ROGERS' \
+    -H "request-identifier: $(uuidgen)" \
+    -b "$COOKIE_JAR" \
+    -c "$COOKIE_JAR" \
+    --data "{\"lat\":$LAT,\"long\":$LON,\"homeAddress\":false}" \
+| jq .
