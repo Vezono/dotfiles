@@ -1,7 +1,7 @@
 #export DISPLAY=:0
 export TERMINAL="foot"
 
-export PATH=$PATH:$HOME/scripts:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin/scripts:$HOME/bin
 export PATH="$HOME/.npm-global/bin:$PATH"
 
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
