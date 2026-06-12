@@ -70,11 +70,11 @@ sorted=$(echo "$accents" | grep -v '^\s*$' | awk -v freqfile="$FREQ_FILE" '
         key = $NF
         printf "%05d\t%s\n", (key in counts ? counts[key] : 0), $0
     }
-' | sort -rn | cut -f2-)
+' | sort -srn | cut -f2-)
 
-result=$(echo "$sorted" | fuzzel -d | awk '{print $NF}' | tr -d '\n')
+result=$(echo "$sorted" | fuzzel --no-sort -d --config=/home/vezono/.config/mango/fuzzel/fuzzel.ini  | awk '{print $NF}' | tr -d '\n')
 
-[[ -z "$result" ]] && exit 0
+[ -z "$result" ] && exit 0
 
 if grep -qF "$result" "$FREQ_FILE"; then
     tmp=$(mktemp)
