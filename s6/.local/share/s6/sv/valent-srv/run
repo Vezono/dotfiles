@@ -2,4 +2,4 @@
 
 fdmove -c 2 1
 
-valent
+valent --gapplication-service

@@ -2,7 +2,7 @@
 
 fdmove -c 2 1
 importas -S HOME
-envfile ${HOME}/.config/mango/s6-usertree/config/ssh-agent.conf
+envfile ${HOME}/.local/share/s6/config/ssh-agent.conf
 
 multisubstitute {
     importas -S SSH_AUTH_SOCK
