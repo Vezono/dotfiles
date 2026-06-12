@@ -4,7 +4,9 @@ event
 gtk/.config/gtk-3.0/bookmarks
 rc
 .zcompdump
+.zcompdump*
 .nogit
+mangowc/.config/mango/dms
 
 s6/.local/share/s6/svnogit/*
 s6/.local/share/s6/rc/*
