@@ -1,7 +1,7 @@
 source $ZDOTDIR/.zprofile
+tput cnorm
 
 zsh_config_dir="${ZDOTDIR:-${XDG_CONFIG_HOME}/zsh}"
-
 zsh_plugins="${zsh_config_dir}/plugins.zsh"
 zsh_plugins_src="${zsh_config_dir}/plugins.txt"
 
@@ -11,13 +11,19 @@ regen_plugins(){
 }
 
 . ${XDG_DATA_HOME:-~/.local/share}/antidote/antidote.zsh
-
-[ ! -e $zsh_plugins_src ] && regen_plugins
+[ ! -e $zsh_plugins ] && regen_plugins
 [ $zsh_plugins_src -nt $zsh_plugins ] && regen_plugins
 
-zstyle ':omz:update' mode disabled
+bindkey -e
 
-. $zsh_plugins
+fpath=($ZDOTDIR/completions $fpath)
+
+source $zsh_plugins
+# All calls to compdef should be done AFTER this line
+
+source ~/.cache/antidote/github.com/marlonrichert/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+bindkey '^I' menu-select
 
 if [ -e "${zsh_config_dir}/aliases.zsh" ]; then
   . "${zsh_config_dir}/aliases.zsh"
@@ -31,8 +37,15 @@ if [ -d /usr/share/fzf ]; then
 . /usr/share/fzf/completion.zsh
 fi
 
-autoload -Uz compinit
-compinit
+set zle_bracketed_paste
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
+autoload -Uz promptinit
+promptinit
+prompt adhde blue nohost
+
+autoload -Uz zcalc
 
 eval "$(zoxide init zsh)"
 

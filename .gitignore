@@ -7,6 +7,10 @@ rc
 .zcompdump*
 .nogit
 mangowc/.config/mango/dms
+.zcalc_history
+
+lazy-lock.json
+lualine
 
 s6/.local/share/s6/svnogit/*
 s6/.local/share/s6/rc/*

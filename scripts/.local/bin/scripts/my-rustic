@@ -1,0 +1,9 @@
+#!/bin/sh
+
+rustic backup .config
+rustic backup .local
+rustic backup .ssh
+rustic backup .thunderbird
+rustic backup Documents
+rustic backup Media
+rustic backup Projects

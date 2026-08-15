@@ -52,6 +52,12 @@ accents=$(cat <<EOF
     u, Diaeresis - ü
 
     y, Diaeresis - ÿ
+
+    y, ЬІ, Cyrillic y - ы
+    Y, ьі, Cyrillic Y - ы
+
+    EH, Е, Cyrillic EH - Э
+    eh, е, Cyrillic eh - э
 EOF
 )
 
@@ -72,7 +78,9 @@ sorted=$(echo "$accents" | grep -v '^\s*$' | awk -v freqfile="$FREQ_FILE" '
     }
 ' | sort -srn | cut -f2-)
 
-result=$(echo "$sorted" | fuzzel --no-sort -d --config=/home/vezono/.config/mango/fuzzel/fuzzel.ini  | awk '{print $NF}' | tr -d '\n')
+result=$(echo "$sorted" | fuzzel --no-sort -d --config=/home/vezono/.config/mango/fuzzel/fuzzel.ini | awk '{print $NF}' | tr -d '\n')
+
+echo $result
 
 [ -z "$result" ] && exit 0
 

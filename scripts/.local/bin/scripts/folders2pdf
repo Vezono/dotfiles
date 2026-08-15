@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Converts each folder containing JPG files into a PDF named after the folder.
+# Requires: img2pdf (install with: sudo apt install img2pdf)
+# Usage: ./jpg2pdf.sh /path/to/parent/dir
+
+set -euo pipefail
+shopt -s nullglob nocaseglob
+
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") [DIR] [PATTERN]
+
+  DIR      Parent directory containing subfolders of JPGs (default: .)
+  PATTERN  Output filename pattern, %num% is replaced with the subfolder
+           name (default: "Strokach-%num% Lab.pdf")
+
+Options:
+  -h, --help  Show this help
+
+Example:
+  $(basename "$0") /path/to/dir "Strokach-%num% Lab.pdf"
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    usage
+    exit 0
+fi
+
+if [ $# -gt 2 ]; then
+    echo "Error: too many arguments" >&2
+    usage
+    exit 1
+fi
+
+target="${1:-.}"
+pattern="${2:-Strokach-%num% Lab.pdf}"
+
+if [ ! -d "$target" ]; then
+    echo "Error: '$target' is not a directory" >&2
+    usage
+    exit 1
+fi
+
+cd "$target"
+
+for dir in */; do
+    dir="${dir%/}"
+    jpgs=("$dir"/*.jpg "$dir"/*.jpeg)
+    if [ ${#jpgs[@]} -gt 0 ]; then
+        output="${pattern//%num%/$dir}"
+        echo "Creating $output"
+        img2pdf "${jpgs[@]}" -o "$output"
+    fi
+done

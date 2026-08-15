@@ -12,6 +12,7 @@ export XDG_STATE_HOME=$HOME/.local/state
 export XDG_CACHE_HOME=$HOME/.cache
 
 export S6_FRONTEND_CONF="$XDG_DATA_HOME/s6/s6-frontend.conf"
+export S6_CONF="$XDG_DATA_HOME/s6/s6-frontend.conf"
 
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass 

@@ -88,7 +88,7 @@ repo_init(){
     echo
     echo "Adding all services from 'current-set-init' bundle to 'enabled' rx (it's ok to fail here if the bundle does not exist)"
     echo
-    s6 -v2 set enable -I pull current-set-init
+    s6 -v2 set enable -p current-set-init 
     echo
     echo "Committing changes"
     echo
