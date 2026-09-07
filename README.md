@@ -2,6 +2,7 @@
 
 My personal dotfiles for my Linux setup.
 
+It is not really cohesive design-wise currently.
 
 
 ---
