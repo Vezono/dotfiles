@@ -12,33 +12,19 @@ My personal dotfiles for my Linux setup.
 
 
 | | |
-
 | ------------------------- | ------------------------------------------------------------------ |
-
 | **Compositor** | [MangoWC](https://github.com/DreamMaoMao/mango) + [DankMaterialShell](mangowc/.config/mango/config.conf) (sourced as `./dms/*.conf`) |
-
 | **Shell** | [Zsh](https://www.zsh.org) + [antidote](https://getantidote.github.io), plugin set based on [Senderman/adhde-zsh-settings](https://github.com/Senderman/adhde-zsh-settings) |
-
 | **Terminal** | [Foot](https://codeberg.org/dnkl/foot) |
-
 | **Text editor** | [Neovim](https://neovim.io) |
-
 | **File manager** | [Yazi](https://yazi-rs.github.io) |
-
 | **Fuzzy finder** | [Television](https://github.com/alexpasmantier/television) |
-
 | **Launcher** | [Fuzzel](https://codeberg.org/dnkl/fuzzel) |
-
 | **Screenshot** | `rishot`  (custom patched) |
-
 | **Clipboard** | wl-clipboard + [Cliphist](https://github.com/sentriz/cliphist) |
-
 | **Audio** | PipeWire + WirePlumber |
-
 | **Backups** | [rustic](https://rustic.cli.rs) via [my-rustic](scripts/.local/bin/scripts/my-rustic) |
-
 | **Process supervision** | [s6 / s6-rc](https://skarnet.org/software) via [usertree](scripts/.local/bin/scripts/usertree) |
-
 | **Package manager helper** | [yay](https://github.com/Jguer/yay) |
 
   
@@ -132,37 +118,21 @@ Package names below are for  pacman / AUR.
   
 
 | Package | Why |
-
 | --- | --- |
-
 | `zsh` | shell |
-
 | `git` | git |
-
 | `stow` | dotfile symlink management |
-
 | `s6`, `s6-rc`, `s6-linux-init` (AUR) | process supervision used by [`usertree`](scripts/.local/bin/scripts/usertree) |
-
 | `dbus` | session bus, required by almost every service in `s6/sv/*` |
-
 | `wpctl` → part of `wireplumber` | audio control (`changevolume`) |
-
 | `pipewire`, `pipewire-pulse`, `wireplumber` | audio stack (s6 services) |
-
 | `xdg-desktop-portal`, `xdg-desktop-portal-gtk`, `xdg-desktop-portal-wlr` | portals bundle (s6 `portals` bundle) |
-
 | `xdg-user-dirs` | provides `user-dirs.dirs`/`user-dirs.locale` handling |
-
 | `gnupg` | `gpg-agent` s6 service |
-
 | `openssh` | `ssh-agent` s6 service |
-
 | `util-linux` | `lsblk`, `uuidgen` (base install, usually already present) |
-
 | `cryptsetup` | LUKS mount/unmount in `mounter`/`unmounter` |
-
 | `curl` | `rogers-outage` script |
-
 | `execline` | s6 run scripts are execline scripts |
 
   

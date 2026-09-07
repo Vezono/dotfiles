@@ -5,6 +5,7 @@ gtk/.config/gtk-3.0/bookmarks
 rc
 .zcompdump
 .zcompdump*
+.zcompdump-*
 .nogit
 mangowc/.config/mango/dms
 .zcalc_history
