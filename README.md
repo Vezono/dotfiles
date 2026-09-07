@@ -2,11 +2,15 @@
 
 My personal dotfiles for my Linux setup.
 
-  
+
 
 ---
 
-  
+
+![Preview](./.media/screenshot-1.png)
+
+---
+
 
 # Software used
 
