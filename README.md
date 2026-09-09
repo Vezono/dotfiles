@@ -8,7 +8,7 @@ It is not really cohesive design-wise currently.
 ---
 
 
-![Preview](./.media/screenshot-1.png)
+![Preview](./.media/screenshot-2.png)
 
 ---
 
